@@ -7,10 +7,9 @@ import java.sql.Statement;
 public class Main {
     public static void main(String[] args) {
         DBWorker dbWorker = new DBWorker();
-        String query = "select * from users";
-        try {
-            Statement statement = dbWorker.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
+        String query = "select * from users where age > 23";
+        try (Statement statement = dbWorker.getConnection().createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
 
             while (resultSet.next()) {
                 User user = new User();
